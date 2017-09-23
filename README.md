@@ -8,12 +8,26 @@
 
 一个轮子
 
+### 在线demo
+[预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)
+
 ###  安装
 ```
 npm install --save react-dragger-r
 ```
 
-[预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)
+### 本地预览
+```
+git clone https://github.com/215566435/React-dragger-R.git
+cd React-dragger-R
+npm install
+npm run dev
+
+
+```
+登陆本地预览地址：[http://127.0.0.1:8080/](http://127.0.0.1:8080/)
+
+
 
 基本用法
 ----
@@ -36,11 +50,6 @@ class LayoutDemo extends React.Component {
         )
     }
 }
-
-<Dragger>
-    <div>普通的拖拽组件</div>
-</Dragger>
-
 
 ReactDOM.render(
     <div>
