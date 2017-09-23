@@ -5,11 +5,11 @@ module.exports = {
     entry: [
         // 'react-hot-loader/patch',
         // 'webpack/hot/only-dev-server',
-        './app/src/App.js'
+        './app/src/index.js'
     ],
     output: {
         path: resolve(__dirname, 'build'),//打包后的文件存放的地方
-        filename: "react-dragger-layout.js",//打包后输出文件的文件名
+        filename: "bundle.js",//打包后输出文件的文件名
         publicPath: "/",
         libraryTarget: 'umd'
     },
@@ -18,21 +18,21 @@ module.exports = {
         hot: true,
         publicPath: '/',
     },
-    externals: {
-        'react': {
-          'commonjs': 'react',
-          'commonjs2': 'react',
-          'amd': 'react',
-          // React dep should be available as window.React, not window.react
-          'root': 'React'
-        },
-        'react-dom': {
-          'commonjs': 'react-dom',
-          'commonjs2': 'react-dom',
-          'amd': 'react-dom',
-          'root': 'ReactDOM'
-        }
-      },
+    // externals: {
+    //     'react': {
+    //       'commonjs': 'react',
+    //       'commonjs2': 'react',
+    //       'amd': 'react',
+    //       // React dep should be available as window.React, not window.react
+    //       'root': 'React'
+    //     },
+    //     'react-dom': {
+    //       'commonjs': 'react-dom',
+    //       'commonjs2': 'react-dom',
+    //       'amd': 'react-dom',
+    //       'root': 'ReactDOM'
+    //     }
+    //   },
     module: {
         rules: [
             {
