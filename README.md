@@ -8,15 +8,46 @@
 
 一个轮子
 
+###  安装
+```
+npm install --save react-dragger-r
+```
+
 [预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)
 
 基本用法
 ----
+使用Dragger组件去包裹一个原声组件即可
+[预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)的[源码](https://github.com/215566435/React-dragger-R/blob/master/app/src/App.js)在这里
+
 ````javascript
+import React from 'react'
+import Dragger from 'react-dragger-r'
+import ReactDOM from 'react-dom'
+
+class LayoutDemo extends React.Component {
+    render() {
+        return (
+            <div>
+                <Dragger style={{ left: 50 }}>
+                    <div>普通的拖拽组件</div>
+                </Dragger>
+            </div>
+        )
+    }
+}
 
 <Dragger>
     <div>普通的拖拽组件</div>
 </Dragger>
+
+
+ReactDOM.render(
+    <div>
+        <LayoutDemo />
+    </div>,
+    document.getElementById('root')
+);
 
 ````
 
