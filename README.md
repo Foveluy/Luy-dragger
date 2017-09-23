@@ -1,6 +1,6 @@
 # React拖拽组件 (React-dragger-R)
 
-[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/react-dragger-r)
+[![npm](https://img.shields.io/badge/npm-0.0.8-green.svg)](https://www.npmjs.com/package/react-dragger-r)
 
 简介
 ----
