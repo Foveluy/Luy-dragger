@@ -6,7 +6,7 @@
 ----
 ...A wheel....anyway
 
-一个轮子，用react做的拖拽组件。易懂，易用。
+一个轮子，用react做的拖拽组件。易懂，易用，纯粹使用react，无需jQuery
 
 ### 在线demo
 [预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)

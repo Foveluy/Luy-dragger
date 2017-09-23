@@ -149,14 +149,14 @@ export default class Dragger extends React.Component {
 
             /**
              * 保证不超出右边界和底部
-             * keep element right and bot can not cross the bounds
+             * 
              */
             if (isNumber(NewBounds.right)) deltaX = Math.min(deltaX, NewBounds.right)
             if (isNumber(NewBounds.bottom)) deltaY = Math.min(deltaY, NewBounds.bottom)
 
             /**
              * 保证不超出左边和上边
-             * keep element left and top can not cross the bounds
+             * 
              */
             if (isNumber(NewBounds.left)) deltaX = Math.max(deltaX, NewBounds.left)
             if (isNumber(NewBounds.top)) deltaY = Math.max(deltaY, NewBounds.top)
@@ -205,13 +205,10 @@ export default class Dragger extends React.Component {
             (typeof this.parent === 'undefined' || this.parent === null)) {
             /**
              * 在这里我们将父节点缓存下来，保证当用户鼠标离开拖拽区域时，我们仍然能获取到父节点
-             * what we do here is 
-             * making sure that we still can retrieve our parent when user's mouse left this node.
              */
             this.parent = event.currentTarget.offsetParent
             /**
              * 我们自己
-             * ourself
              */
             this.self = event.currentTarget
         }
