@@ -89,7 +89,6 @@
         onDragStart: PropTypes.func,
         onMove: PropTypes.func,
         onDragEnd: PropTypes.func
-    }
 ````
 
 
