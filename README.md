@@ -1,5 +1,7 @@
 # React拖拽组件 (React-dragger-R)
 
+[![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/react-dragger-r)
+
 简介
 ----
 ...A wheel....anyway

@@ -7,8 +7,6 @@ import './style.css'
 
 
 export default class LayoutDemo extends React.Component {
-
-
     state = {
         x: 0,
         y: 0
@@ -34,7 +32,7 @@ export default class LayoutDemo extends React.Component {
                 <Dragger onMove={this.onDrag.bind(this)} style={{ left: 650 }}>
                     <div>
                         <div>x:{this.state.x} px</div>
-                        <div>x:{this.state.y} px</div>
+                        <div>y:{this.state.y} px</div>
                     </div>
                 </Dragger>
                 <Dragger style={{ left: 50, top: 200 }} hasDraggerHandle={true}>
