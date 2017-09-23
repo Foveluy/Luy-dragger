@@ -90,6 +90,12 @@ export default class LayoutDemo extends React.Component {
                         <div>别想拖动我</div>
                     </div>
                 </Dragger>
+                <Dragger bounds={{left:100,top:100,right:100,bottom:100}} style={{ left: 250, top: 400 }}>
+                    <div>
+                        <div>我只能在范围100px内移动</div>
+                    </div>
+                </Dragger>
+
                 <div className='bounds' style={{ zIndex: -1, border: ' 1px solid rgba(120, 120, 120, 0.4)', left: 900, top: 200, width: 500, height: 500, position: 'absolute' }}>
                     <Dragger bounds='parent' >
                         <div>不能离开框框的范围</div>

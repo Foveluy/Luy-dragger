@@ -133,7 +133,8 @@ export default class Dragger extends React.Component {
             /**
             * 如果用户指定一个边界，那么在这里处理
             */
-            let NewBounds = typeof bounds !== 'string' ? bounds : parseBounds(bounds)
+            let NewBounds = typeof bounds === 'string' ? bounds : parseBounds(bounds)
+            console.log(NewBounds)
 
             if (this.props.bounds === 'parent') {
                 NewBounds = {

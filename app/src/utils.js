@@ -37,8 +37,8 @@ export const outerHeight = (node) => {
 }
 export const parseBounds = (bounds) => {
     return {
-        left: bounds.left,
-        top: bounds.top,
+        left: -bounds.left,
+        top: -bounds.top,
         right: bounds.right,
         bottom: bounds.bottom
     }
