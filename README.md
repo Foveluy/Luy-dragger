@@ -89,6 +89,13 @@
         onDragStart: PropTypes.func,
         onMove: PropTypes.func,
         onDragEnd: PropTypes.func
+
+
+        /*
+        * css Style
+        * 如：style={{padding:10}}
+        */
+        style
 ````
 
 
