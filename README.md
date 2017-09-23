@@ -1,12 +1,12 @@
 # React拖拽组件 (React-dragger-R)
 
-[![npm](https://img.shields.io/badge/npm-0.0.8-green.svg)](https://www.npmjs.com/package/react-dragger-r)
+[![npm](https://img.shields.io/badge/npm-0.0.10-green.svg)](https://www.npmjs.com/package/react-dragger-r)
 
 简介
 ----
 ...A wheel....anyway
 
-一个轮子
+一个轮子，用react做的拖拽组件。易懂，易用。
 
 ### 在线demo
 [预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)
@@ -31,7 +31,8 @@ npm run dev
 
 基本用法
 ----
-使用Dragger组件去包裹一个原声组件即可
+使用Dragger组件去包裹任意一个组件即可
+
 [预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)的[源码](https://github.com/215566435/React-dragger-R/blob/master/app/src/App.js)在这里
 
 ````javascript
@@ -138,6 +139,26 @@ ReactDOM.render(
         * 如：style={{padding:10}}
         */
         style
+````
+
+### 注意事项
+子元素中只能拥有一个根元素，即只能以下列的形式存在，必须在外包裹一层
+````javascript
+    <Dragger style={{ left: 50 }}>
+            <div>
+                <div>组件1</div>
+                <div>组件2</div>
+            </div>
+    </Dragger>
+````
+
+至于这样的组件是不允许的
+
+````javascript
+    <Dragger style={{ left: 50 }}>
+            <div>组件1</div>
+            <div>组件2</div>
+    </Dragger>
 ````
 
 
