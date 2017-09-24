@@ -1,6 +1,6 @@
 # React拖拽组件 (React-dragger-R)
 
-[![npm](https://img.shields.io/badge/npm-0.0.10-green.svg)](https://www.npmjs.com/package/react-dragger-r)
+[![npm](https://img.shields.io/badge/npm-0.0.11-green.svg)](https://www.npmjs.com/package/react-dragger-r)
 
 简介
 ----
@@ -168,7 +168,7 @@ TodoList
 ----
 
 - [x] 完成基本的逻辑
-- [ ] 手机端的适配
+- [x] 手机端的适配
 - [ ] 使用Ts重写
 - [ ] 代码逻辑封装
 
