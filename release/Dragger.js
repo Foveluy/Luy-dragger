@@ -64,6 +64,11 @@ var Dragger = function (_React$Component) {
             var deltaX = event.clientX - this.state.originX + lastX;
             var deltaY = event.clientY - this.state.originY + lastY;
 
+            if (event.type === 'touchmove') {
+                deltaX = event.touches[0].clientX - this.state.originX + lastX;
+                deltaY = event.touches[0].clientY - this.state.originY + lastY;
+            }
+
             /**
              * 网格式移动范围设定，永远移动 n 的倍数
              * 注意:设定移动范围的时候，一定要在判断bounds之前，否则会造成bounds不对齐
@@ -82,7 +87,6 @@ var Dragger = function (_React$Component) {
                 * 如果用户指定一个边界，那么在这里处理
                 */
                 var NewBounds = typeof bounds === 'string' ? bounds : parseBounds(bounds);
-                console.log(NewBounds);
 
                 if (this.props.bounds === 'parent') {
                     NewBounds = {
@@ -145,6 +149,9 @@ var Dragger = function (_React$Component) {
             doc.addEventListener('mousemove', this.move);
             doc.addEventListener('mouseup', this.onDragEnd);
 
+            doc.addEventListener('touchmove', this.move);
+            doc.addEventListener('touchend', this.onDragEnd);
+
             if (this.props.bounds === 'parent' && (
             /**为了让 这段代码不会重复执行 */
             typeof this.parent === 'undefined' || this.parent === null)) {
@@ -158,11 +165,18 @@ var Dragger = function (_React$Component) {
                 this.self = event.currentTarget;
             }
 
-            if (this.props.onDragStart) this.props.onDragStart(this.state.x, this.state.y);
+            if (this.props.onDragStart) this.props.onDragStart(event, this.state.x, this.state.y);
 
+            var deltaX = event.clientX;
+            var deltaY = event.clientY;
+
+            if (event.type === 'touchstart') {
+                deltaX = event.touches[0].clientX;
+                deltaY = event.touches[0].clientY;
+            }
             this.setState({
-                originX: event.clientX,
-                originY: event.clientY,
+                originX: deltaX,
+                originY: deltaY,
                 lastX: this.state.x,
                 lastY: this.state.y
             });
@@ -176,6 +190,9 @@ var Dragger = function (_React$Component) {
             this.self = null;
             doc.removeEventListener('mousemove', this.move);
             doc.removeEventListener('mouseup', this.onDragEnd);
+
+            doc.removeEventListener('touchmove', this.move);
+            doc.removeEventListener('touchend', this.onDragEnd);
 
             if (this.props.onDragEnd) this.props.onDragEnd(event);
         }
@@ -240,7 +257,9 @@ var Dragger = function (_React$Component) {
                 _extends({ className: fixedClassName + 'WrapDragger',
                     style: _extends({}, style, { touchAction: 'none!important', transform: 'translate(' + x + 'px,' + y + 'px)' }),
                     onMouseDown: this.onDragStart.bind(this),
-                    onMouseUp: this.onDragEnd.bind(this)
+                    onMouseUp: this.onDragEnd.bind(this),
+                    onTouchStart: this.onDragStart.bind(this),
+                    onTouchEnd: this.onDragStart.bind(this)
                 }, others),
                 React.cloneElement(React.Children.only(this.props.children), {})
             );

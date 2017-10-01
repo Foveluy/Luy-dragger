@@ -222,7 +222,7 @@ export default class Dragger extends React.Component {
             this.self = event.currentTarget
         }
 
-        if (this.props.onDragStart) this.props.onDragStart(this.state.x, this.state.y)
+        if (this.props.onDragStart) this.props.onDragStart(event,this.state.x, this.state.y)
 
 
         let deltaX = event.clientX

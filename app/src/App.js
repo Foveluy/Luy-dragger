@@ -20,6 +20,7 @@ export default class LayoutDemo extends React.Component {
     render() {
         return (
             <div>
+                <div>{this.state.x}{this.state.x}{this.state.x}{this.state.x}{this.state.x}</div>
                 <Dragger style={{ left: 50 }}>
                     <div>普通的拖拽组件</div>
                 </Dragger>

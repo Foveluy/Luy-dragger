@@ -43,6 +43,15 @@ var LayoutDemo = function (_React$Component) {
                 'div',
                 null,
                 React.createElement(
+                    'div',
+                    null,
+                    this.state.x,
+                    this.state.x,
+                    this.state.x,
+                    this.state.x,
+                    this.state.x
+                ),
+                React.createElement(
                     Dragger,
                     { style: { left: 50 } },
                     React.createElement(
