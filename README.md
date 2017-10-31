@@ -10,7 +10,7 @@
 其实我已经用luy来进行重构了
 
 ### 在线demo
-[预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/React-dragger-R/blob/master/build/index.html)
+[预览地址(demo)](http://htmlpreview.github.io/?https://github.com/215566435/Luy-dragger/blob/master/build/index.html)
 
 ###  安装
 ```
