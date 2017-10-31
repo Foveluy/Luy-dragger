@@ -10,11 +10,12 @@
     "react"
       // 转译React组件为JS代码
   ],
+  
   "plugins": [
     "transform-runtime",
-    "react-hot-loader/babel",
+    // "react-hot-loader/babel",
     "transform-object-rest-spread",
-    "transform-react-jsx"
+    "external-helpers"
       // 开启react代码的模块热替换（HMR）
   ]
 }

@@ -13,6 +13,12 @@ module.exports = {
         filename: "bundle.js",//打包后输出文件的文件名
         publicPath: "/"
     },
+    resolve: {
+        alias: {
+           'react': 'luy',
+           'react-dom': 'luy'
+        }
+     },
     devServer: {
         contentBase: resolve(__dirname, 'build'),
         hot: true,
