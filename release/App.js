@@ -4,7 +4,6 @@ import _createClass from 'babel-runtime/helpers/createClass';
 import _possibleConstructorReturn from 'babel-runtime/helpers/possibleConstructorReturn';
 import _inherits from 'babel-runtime/helpers/inherits';
 import React from 'react';
-import PropTypes from 'prop-types';
 import Dragger from './Dragger';
 
 import './style.css';
@@ -42,15 +41,6 @@ var LayoutDemo = function (_React$Component) {
             return React.createElement(
                 'div',
                 null,
-                React.createElement(
-                    'div',
-                    null,
-                    this.state.x,
-                    this.state.x,
-                    this.state.x,
-                    this.state.x,
-                    this.state.x
-                ),
                 React.createElement(
                     Dragger,
                     { style: { left: 50 } },
@@ -254,18 +244,4 @@ var LayoutDemo = function (_React$Component) {
     return LayoutDemo;
 }(React.Component);
 
-var _default = LayoutDemo;
-export default _default;
-;
-
-var _temp2 = function () {
-    if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-        return;
-    }
-
-    __REACT_HOT_LOADER__.register(LayoutDemo, 'LayoutDemo', 'app/src/App.js');
-
-    __REACT_HOT_LOADER__.register(_default, 'default', 'app/src/App.js');
-}();
-
-;
+export default LayoutDemo;

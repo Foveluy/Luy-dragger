@@ -40,10 +40,10 @@ export default class LayoutDemo extends React.Component {
                             className='handle'
                             style={{
                                 padding: 8, textAlign: 'center',
-                                background: 'rgba(120, 120, 120, 0.4)', 
+                                background: 'rgba(120, 120, 120, 0.4)',
                                 marginBottom: 8,
                                 borderRadius: '5px',
-                                color:'white'
+                                color: 'white'
                             }}
                         >
                             拖拽把手
@@ -57,15 +57,15 @@ export default class LayoutDemo extends React.Component {
                             className='cancel'
                             style={{
                                 padding: 8, textAlign: 'center',
-                                background: 'rgba(120, 120, 120, 0.4)', 
+                                background: 'rgba(120, 120, 120, 0.4)',
                                 marginBottom: 8,
                                 borderRadius: '5px',
-                                color:'white'
+                                color: 'white'
                             }}
                         >
                             点这无法拖动
                         </div>
-                        <div style={{textAlign: 'center'}}>点击拖拽</div>
+                        <div style={{ textAlign: 'center' }}>点击拖拽</div>
                     </div>
                 </Dragger>
 
@@ -87,7 +87,7 @@ export default class LayoutDemo extends React.Component {
                         <div>别想拖动我</div>
                     </div>
                 </Dragger>
-                <Dragger bounds={{left:100,top:100,right:100,bottom:100}} style={{ left: 250, top: 400 }}>
+                <Dragger bounds={{ left: 100, top: 100, right: 100, bottom: 100 }} style={{ left: 250, top: 400 }}>
                     <div>
                         <div>我只能在范围100px内移动</div>
                     </div>
