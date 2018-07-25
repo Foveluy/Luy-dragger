@@ -11,9 +11,12 @@ body {
 html {
   background: #eee;
 }
+
 .draggers {
-  width: 150px;
-  height: 150px;
+  font-size: 10px;
+
+  width: 100px;
+  height: 50px;
   border: 1px solid rgba(120, 120, 120, 0.4);
 
   border-radius: 5px;

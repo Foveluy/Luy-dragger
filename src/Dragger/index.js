@@ -225,6 +225,14 @@ class Dragger extends React.Component {
       touchAction: "none!important",
       transform: `translate3d(${x}px,${y}px,0)`
     };
+    const bound = {
+      instance: this.getParent,
+      /**
+       * 边框依赖 position 属性
+       */
+      style: { position: "absolute" }
+    };
+
     return (
       <div className={fixedClassName}>
         {children({
@@ -232,7 +240,7 @@ class Dragger extends React.Component {
           handle: getHandle,
           x,
           y,
-          getParent: this.getParent,
+          bound: bound,
           static: this.props.static,
           dragging: this.state.dragging
         })}

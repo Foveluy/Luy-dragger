@@ -57,10 +57,9 @@ export default class LayoutDemo extends React.Component {
               <div
                 {...handle()}
                 style={{
-                  padding: 8,
+                  padding: 3,
                   textAlign: "center",
                   background: "rgba(120, 120, 120, 0.4)",
-                  marginBottom: 8,
                   borderRadius: "5px",
                   color: "white"
                 }}
@@ -86,41 +85,23 @@ export default class LayoutDemo extends React.Component {
             </div>
           )}
         </Dragger>
-
-        {/* 
-
-      
-        <Dragger
-          bounds={{ left: 100, top: 100, right: 100, bottom: 100 }}
-          style={{ left: 250, top: 400 }}
-        >
-          <div>
-            <div>我只能在范围100px内移动</div>
-          </div>
-        </Dragger>
-
-        <div
-          className="bounds"
-          style={{
-            zIndex: -1,
-            border: " 1px solid rgba(120, 120, 120, 0.4)",
-            left: 900,
-            top: 200,
-            width: 500,
-            height: 500,
-            position: "absolute"
-          }}
-        >
-          <Dragger bounds="parent">
-            <div>不能离开框框的范围</div>
-          </Dragger>
-          <Dragger bounds="parent" style={{ left: 200, margin: 10 }}>
-            <div>
-              <div>不能离开框框的范围</div>
-              <div>并且有10px的margin</div>
+        <Dragger bounds>
+          {({ style, handle, bound }) => (
+            <div
+              ref={bound.instance}
+              style={{
+                ...bound.style,
+                width: 150,
+                height: 150,
+                border: "1px solid black"
+              }}
+            >
+              <div className={name} style={style} {...handle()}>
+                <div>不能离开框框的范围</div>
+              </div>
             </div>
-          </Dragger>
-        </div> */}
+          )}
+        </Dragger>
       </div>
     );
   }
