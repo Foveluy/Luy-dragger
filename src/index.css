@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+* {
+  font-size: 14px;
+  color: rgba(80, 80, 80, 0.9);
+}
+html {
+  background: #eee;
+}
+.draggers {
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(120, 120, 120, 0.4);
+
+  border-radius: 5px;
+  display: flex;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
