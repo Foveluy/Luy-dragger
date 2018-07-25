@@ -4,97 +4,92 @@ import Dragger from "./Dragger";
 import "./index.css";
 
 export default class LayoutDemo extends React.Component {
-  state = {
-    x: 0,
-    y: 0
-  };
-
-  onDrag(e, x, y) {
-    this.setState({
-      x: x,
-      y: y
-    });
-  }
   render() {
     const name = "draggers";
 
     return (
       <div>
-        <Dragger bounds>
-          {({ style, handle, getParent }) => (
-            <div ref={getParent} style={{ width: 300, height: 300 }}>
-              <div className={name} style={{ ...style }} {...handle()}>
-                普通的拖拽组件
-              </div>
+        <Dragger>
+          {({ style, handle }) => (
+            <div className={name} style={{ ...style }} {...handle()}>
+              普通的拖拽组件
             </div>
           )}
         </Dragger>
-        {/* <Dragger allowY={false} style={{ left: 250 }}>
-          <div>不允许在y轴移动</div>
-        </Dragger>
-        <Dragger allowX={false} style={{ left: 450 }}>
-          <div>不允许在x轴移动</div>
-        </Dragger>
-        <Dragger onMove={this.onDrag.bind(this)} style={{ left: 650 }}>
-          <div>
-            <div>x:{this.state.x} px</div>
-            <div>y:{this.state.y} px</div>
-          </div>
-        </Dragger>
-        <Dragger style={{ left: 50, top: 200 }} hasDraggerHandle={true}>
-          <div>
+        <Dragger>
+          {({ style, handle, dragging }) => (
             <div
-              className="handle"
+              className={name}
               style={{
-                padding: 8,
-                textAlign: "center",
-                background: "rgba(120, 120, 120, 0.4)",
-                marginBottom: 8,
-                borderRadius: "5px",
-                color: "white"
+                ...style,
+                backgroundColor: dragging ? "rgba(180,120,180,0.5)" : "white"
               }}
+              {...handle()}
             >
-              拖拽把手
+              拖动改变颜色
             </div>
-            <div>点把手拖拽</div>
-          </div>
+          )}
         </Dragger>
-        <Dragger style={{ left: 50, top: 400 }} hasCancelHandle={true}>
-          <div>
-            <div
-              className="cancel"
-              style={{
-                padding: 8,
-                textAlign: "center",
-                background: "rgba(120, 120, 120, 0.4)",
-                marginBottom: 8,
-                borderRadius: "5px",
-                color: "white"
-              }}
-            >
-              点这无法拖动
+        <Dragger>
+          {({ style, handle, x, y }) => (
+            <div className={name} style={style} {...handle()}>
+              相对x:{x},相对y:{y}
             </div>
-            <div style={{ textAlign: "center" }}>点击拖拽</div>
-          </div>
+          )}
+        </Dragger>
+        <Dragger allowY={false}>
+          {({ style, handle }) => (
+            <div className={name} style={style} {...handle()}>
+              不允许在y轴移动
+            </div>
+          )}
+        </Dragger>
+        <Dragger allowX={false}>
+          {({ style, handle }) => (
+            <div className={name} style={style} {...handle()}>
+              不允许在x轴移动
+            </div>
+          )}
+        </Dragger>
+        <Dragger>
+          {({ style, handle }) => (
+            <div className={name} style={style}>
+              <div
+                {...handle()}
+                style={{
+                  padding: 8,
+                  textAlign: "center",
+                  background: "rgba(120, 120, 120, 0.4)",
+                  marginBottom: 8,
+                  borderRadius: "5px",
+                  color: "white"
+                }}
+              >
+                拖拽把手
+              </div>
+              <div>点把手拖拽</div>
+            </div>
+          )}
+        </Dragger>
+        <Dragger grid={[25, 25]}>
+          {({ style, handle }) => (
+            <div className={name} style={style} {...handle()}>
+              <div>网格移动</div>
+              <div>每次移动25px</div>
+            </div>
+          )}
+        </Dragger>
+        <Dragger style={{ left: 650, top: 200 }}>
+          {({ style }) => (
+            <div className={name} style={style}>
+              <div>静态，别想拖动我</div>
+            </div>
+          )}
         </Dragger>
 
-        <Dragger grid={[25, 25]} style={{ left: 250, top: 200 }}>
-          <div>
-            <div>网格移动</div>
-            <div>每次移动30px</div>
-          </div>
-        </Dragger>
-        <Dragger grid={[100, 100]} style={{ left: 450, top: 200 }}>
-          <div>
-            <div>网格移动</div>
-            <div>每次移动100px</div>
-          </div>
-        </Dragger>
-        <Dragger static={true} style={{ left: 650, top: 200 }}>
-          <div>
-            <div>别想拖动我</div>
-          </div>
-        </Dragger>
+        {/* 
+
+      
         <Dragger
           bounds={{ left: 100, top: 100, right: 100, bottom: 100 }}
           style={{ left: 250, top: 400 }}

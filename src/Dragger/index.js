@@ -26,9 +26,9 @@ class Dragger extends React.Component {
 
   state = {
     /** x轴位移，单位是px */
-    x: null,
+    x: 0,
     /** y轴位移，单位是px */
-    y: null,
+    y: 0,
     /**鼠标点击元素的原始位置，单位是px */
     originX: 0,
     originY: 0,
