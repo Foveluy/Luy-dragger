@@ -16,6 +16,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "pre-commit": "^1.2.2",
     "react-component-json": "^1.7.1"
   }
 }
