@@ -6,6 +6,7 @@ const file = fs.readFileSync('./src/Dragger/index.js', 'utf8');
 const json = ReactComponentJson.json(file);
 const md = ReactComponentJson.md(json);
 
-console.log(md);
 
-fs.writeFileSync('./README.md', md.md);
+const readme = fs.readFileSync('./readme.md', 'utf8');
+
+fs.writeFileSync('./README.md', readme + '\n' + md.md);

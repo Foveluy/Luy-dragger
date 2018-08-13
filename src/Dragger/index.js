@@ -124,7 +124,7 @@ class Dragger extends React.Component {
     deltaY = this.props.allowY ? deltaY : 0;
 
     /**移动时回调，用于外部控制 */
-    if (this.props.onMove) this.props.onMove(event, deltaX, deltaY);
+    this.props.onDragMove && this.props.onDragMove(event, deltaX, deltaY);
 
     this.setState({
       x: deltaX,
@@ -292,10 +292,16 @@ Dragger.propTypes = {
   static: PropTypes.bool,
 
   /**
-   * 生命周期回调
+   * 开始拖拽
    */
   onDragStart: PropTypes.func,
-  onMove: PropTypes.func,
+  /**
+   * 正在拖拽
+   */
+  onDragMove: PropTypes.func,
+  /**
+   * 结束拖拽，鼠标弹开
+   */
   onDragEnd: PropTypes.func
 };
 
