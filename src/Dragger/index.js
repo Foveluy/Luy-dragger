@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   int,
   innerHeight,
@@ -8,9 +8,9 @@ import {
   outerWidth,
   parseBounds,
   isNumber
-} from "./utils";
+} from './utils';
 
-import classNames from "classnames";
+import classNames from 'classnames';
 
 const doc = document;
 
@@ -44,7 +44,7 @@ class Dragger extends React.Component {
 
   move = event => {
     /** 保证用户在移动元素的时候不会选择到元素内部的东西 */
-    doc.body.style.userSelect = "none";
+    doc.body.style.userSelect = 'none';
 
     let { lastX, lastY } = this.state;
     /*  event.client - this.state.origin 表示的是移动的距离,
@@ -53,7 +53,7 @@ class Dragger extends React.Component {
     let deltaX = event.clientX - this.state.originX + lastX;
     let deltaY = event.clientY - this.state.originY + lastY;
 
-    if (event.type === "touchmove") {
+    if (event.type === 'touchmove') {
       deltaX = event.touches[0].clientX - this.state.originX + lastX;
       deltaY = event.touches[0].clientY - this.state.originY + lastY;
     }
@@ -75,6 +75,7 @@ class Dragger extends React.Component {
        */
       let NewBounds = bounds === true ? bounds : parseBounds(bounds);
 
+      console.log();
       if (this.parent) {
         NewBounds = {
           left:
@@ -89,8 +90,10 @@ class Dragger extends React.Component {
             innerWidth(this.parent) -
             outerWidth(this.self) -
             this.self.offsetLeft +
+            int(this.self.style.borderRight) -
             int(this.parent.style.paddingRight) -
-            int(this.self.style.marginRight),
+            int(this.self.style.marginRight) -
+            int(this.parent.style.borderRight),
           bottom:
             innerHeight(this.parent) -
             outerHeight(this.self) -
@@ -138,11 +141,11 @@ class Dragger extends React.Component {
      * 绑定在document上可以使得其依旧能够监听
      * 如果绑定在元素上，则鼠标离开元素，就不会再被监听了
      */
-    doc.addEventListener("mousemove", this.move);
-    doc.addEventListener("mouseup", this.onDragEnd);
+    doc.addEventListener('mousemove', this.move);
+    doc.addEventListener('mouseup', this.onDragEnd);
 
-    doc.addEventListener("touchmove", this.move);
-    doc.addEventListener("touchend", this.onDragEnd);
+    doc.addEventListener('touchmove', this.move);
+    doc.addEventListener('touchend', this.onDragEnd);
 
     if (this.parent) {
       /**
@@ -157,7 +160,7 @@ class Dragger extends React.Component {
     let deltaX = event.clientX;
     let deltaY = event.clientY;
 
-    if (event.type === "touchstart") {
+    if (event.type === 'touchstart') {
       deltaX = event.touches[0].clientX;
       deltaY = event.touches[0].clientY;
     }
@@ -172,14 +175,14 @@ class Dragger extends React.Component {
 
   onDragEnd = event => {
     /** 取消用户选择限制，用户可以重新选择 */
-    doc.body.style.userSelect = "";
+    doc.body.style.userSelect = '';
 
     this.self = null;
-    doc.removeEventListener("mousemove", this.move);
-    doc.removeEventListener("mouseup", this.onDragEnd);
+    doc.removeEventListener('mousemove', this.move);
+    doc.removeEventListener('mouseup', this.onDragEnd);
 
-    doc.removeEventListener("touchmove", this.move);
-    doc.removeEventListener("touchend", this.onDragEnd);
+    doc.removeEventListener('touchmove', this.move);
+    doc.removeEventListener('touchend', this.onDragEnd);
 
     this.setState(
       {
@@ -196,7 +199,7 @@ class Dragger extends React.Component {
      * 这个函数只会调用一次
      * 这个只是一个临时的解决方案，因为这样会使得元素进行两次刷新
      */
-    if (typeof this.props.x === "number" && typeof this.props.y === "number") {
+    if (typeof this.props.x === 'number' && typeof this.props.y === 'number') {
       this.setState({
         x: this.props.x,
         y: this.props.y
@@ -209,7 +212,7 @@ class Dragger extends React.Component {
     const { className, children } = this.props;
 
     /**主要是为了让用户定义自己的className去修改css */
-    const fixedClassName = classNames("WrapDragger", {
+    const fixedClassName = classNames('WrapDragger', {
       [className]: className !== void 666
     });
 
@@ -222,7 +225,7 @@ class Dragger extends React.Component {
       };
     };
     const providedStyle = {
-      touchAction: "none!important",
+      touchAction: 'none!important',
       transform: `translate3d(${x}px,${y}px,0)`
     };
     const bound = {
@@ -230,7 +233,7 @@ class Dragger extends React.Component {
       /**
        * 边框依赖 position 属性
        */
-      style: { position: "absolute" }
+      style: { position: 'absolute' }
     };
 
     return (
