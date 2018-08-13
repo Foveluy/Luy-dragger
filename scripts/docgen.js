@@ -7,6 +7,6 @@ const json = ReactComponentJson.json(file);
 const md = ReactComponentJson.md(json);
 
 
-const readme = fs.readFileSync('./readme.md', 'utf8');
+const readme = fs.readFileSync('./scripts/readme.md', 'utf8');
 
-fs.writeFileSync('./README.md', readme + '\n' + md.md);
+fs.writeFileSync('./README.md', readme + "\n" + md.md);

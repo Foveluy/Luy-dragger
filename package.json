@@ -14,11 +14,15 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "docgen":"node ./scripts/docgen.js"
+    "docgen": "node ./scripts/docgen.js",
+    "add": "git add ."
   },
   "devDependencies": {
     "pre-commit": "^1.2.2",
     "react-component-json": "^1.7.1"
   },
-  "pre-commit":[]
+  "pre-commit": [
+    "docgen",
+    "add"
+  ]
 }
