@@ -14,7 +14,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "docgen": "node ./scripts/docgen.js && ./scripts/build.sh",
+    "docgen": "./scripts/build.sh && node ./scripts/docgen.js",
     "add": "git add ."
   },
   "devDependencies": {
