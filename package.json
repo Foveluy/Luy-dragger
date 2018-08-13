@@ -1,7 +1,6 @@
 {
-  "name": "@props/dragger",
-  "version": "0.1.0",
-  "private": true,
+  "name": "props-dragger",
+  "version": "1.0.0",
   "main": "./src/Dragger/index.js",
   "dependencies": {
     "classnames": "^2.2.6",

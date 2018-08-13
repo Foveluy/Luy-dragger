@@ -5,7 +5,7 @@
 ## 安装
 
 ```js
-npm install @props/dragger
+npm install props-dragger
 ```
 
 ## 最简单的例子
