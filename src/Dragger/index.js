@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 import {
   int,
   innerHeight,
@@ -8,11 +8,13 @@ import {
   outerWidth,
   parseBounds,
   isNumber
-} from './utils';
+} from "./utils";
 
-import classNames from 'classnames';
+import classNames from "classnames";
 
 const doc = document;
+
+const noop = (x, y) => {};
 
 class Dragger extends React.Component {
   /**
@@ -21,8 +23,17 @@ class Dragger extends React.Component {
   static defaultProps = {
     allowX: true,
     allowY: true,
-    isUserMove: true
+    x: void 666,
+    y: void 666,
+    onDragging: noop
   };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      nextState !== this.state ||
+      JSON.stringify(nextProps) !== JSON.stringify(this.props)
+    );
+  }
 
   state = {
     /** x轴位移，单位是px */
@@ -44,7 +55,7 @@ class Dragger extends React.Component {
 
   move = event => {
     /** 保证用户在移动元素的时候不会选择到元素内部的东西 */
-    doc.body.style.userSelect = 'none';
+    doc.body.style.userSelect = "none";
 
     let { lastX, lastY } = this.state;
     /*  event.client - this.state.origin 表示的是移动的距离,
@@ -53,7 +64,7 @@ class Dragger extends React.Component {
     let deltaX = event.clientX - this.state.originX + lastX;
     let deltaY = event.clientY - this.state.originY + lastY;
 
-    if (event.type === 'touchmove') {
+    if (event.type === "touchmove") {
       deltaX = event.touches[0].clientX - this.state.originX + lastX;
       deltaY = event.touches[0].clientY - this.state.originY + lastY;
     }
@@ -75,7 +86,6 @@ class Dragger extends React.Component {
        */
       let NewBounds = bounds === true ? bounds : parseBounds(bounds);
 
-      console.log();
       if (this.parent) {
         NewBounds = {
           left:
@@ -125,6 +135,7 @@ class Dragger extends React.Component {
 
     /**移动时回调，用于外部控制 */
     this.props.onDragMove && this.props.onDragMove(event, deltaX, deltaY);
+    this.props.onDragging(deltaX, deltaY);
 
     this.setState({
       x: deltaX,
@@ -141,11 +152,11 @@ class Dragger extends React.Component {
      * 绑定在document上可以使得其依旧能够监听
      * 如果绑定在元素上，则鼠标离开元素，就不会再被监听了
      */
-    doc.addEventListener('mousemove', this.move);
-    doc.addEventListener('mouseup', this.onDragEnd);
+    doc.addEventListener("mousemove", this.move);
+    doc.addEventListener("mouseup", this.onDragEnd);
 
-    doc.addEventListener('touchmove', this.move);
-    doc.addEventListener('touchend', this.onDragEnd);
+    doc.addEventListener("touchmove", this.move);
+    doc.addEventListener("touchend", this.onDragEnd);
 
     if (this.parent) {
       /**
@@ -154,13 +165,15 @@ class Dragger extends React.Component {
       this.self = event.currentTarget;
     }
 
-    if (this.props.onDragStart)
+    this.props.onDragStart &&
       this.props.onDragStart(event, this.state.x, this.state.y);
+
+    this.props.onDragging(this.props.x, this.props.y);
 
     let deltaX = event.clientX;
     let deltaY = event.clientY;
 
-    if (event.type === 'touchstart') {
+    if (event.type === "touchstart") {
       deltaX = event.touches[0].clientX;
       deltaY = event.touches[0].clientY;
     }
@@ -175,15 +188,16 @@ class Dragger extends React.Component {
 
   onDragEnd = event => {
     /** 取消用户选择限制，用户可以重新选择 */
-    doc.body.style.userSelect = '';
+    doc.body.style.userSelect = "";
 
     this.self = null;
-    doc.removeEventListener('mousemove', this.move);
-    doc.removeEventListener('mouseup', this.onDragEnd);
+    doc.removeEventListener("mousemove", this.move);
+    doc.removeEventListener("mouseup", this.onDragEnd);
 
-    doc.removeEventListener('touchmove', this.move);
-    doc.removeEventListener('touchend', this.onDragEnd);
+    doc.removeEventListener("touchmove", this.move);
+    doc.removeEventListener("touchend", this.onDragEnd);
 
+    this.props.onDragging(this.props.x, this.props.y);
     this.setState(
       {
         dragging: false
@@ -199,7 +213,7 @@ class Dragger extends React.Component {
      * 这个函数只会调用一次
      * 这个只是一个临时的解决方案，因为这样会使得元素进行两次刷新
      */
-    if (typeof this.props.x === 'number' && typeof this.props.y === 'number') {
+    if (typeof this.props.x === "number" && typeof this.props.y === "number") {
       this.setState({
         x: this.props.x,
         y: this.props.y
@@ -211,8 +225,11 @@ class Dragger extends React.Component {
     const { x, y } = this.state;
     const { className, children } = this.props;
 
+    const X = this.props.x === void 666 ? x : this.props.x;
+    const Y = this.props.y === void 666 ? y : this.props.y;
+
     /**主要是为了让用户定义自己的className去修改css */
-    const fixedClassName = classNames('WrapDragger', {
+    const fixedClassName = classNames("WrapDragger", {
       [className]: className !== void 666
     });
 
@@ -225,24 +242,25 @@ class Dragger extends React.Component {
       };
     };
     const providedStyle = {
-      touchAction: 'none!important',
-      transform: `translate3d(${x}px,${y}px,0)`
+      touchAction: "none!important",
+      transform: `translate3d(${X}px,${Y}px,0)`
     };
     const bound = {
       instance: this.getParent,
       /**
        * 边框依赖 position 属性
        */
-      style: { position: 'absolute' }
+      style: { position: "absolute" }
     };
 
+    console.log("渲染");
     return (
       <div className={fixedClassName}>
         {children({
           style: providedStyle,
           handle: getHandle,
-          x,
-          y,
+          x: X,
+          y: Y,
           bound: bound,
           static: this.props.static,
           dragging: this.state.dragging
@@ -272,14 +290,6 @@ Dragger.propTypes = {
   allowY: PropTypes.bool,
 
   /**
-   * 内部取消的区域
-   * <Dragger hasCancelHandle={true}>
-   *      <div className={cancel} >点击我拖动</div>
-   * </Dragger>
-   */
-  hasCancelHandle: PropTypes.bool,
-
-  /**
    * 是否由用户移动
    * 可能是通过外部props改变
    */
@@ -302,7 +312,12 @@ Dragger.propTypes = {
   /**
    * 结束拖拽，鼠标弹开
    */
-  onDragEnd: PropTypes.func
+  onDragEnd: PropTypes.func,
+
+  /**
+   * 受控函数
+   */
+  onDragging: PropTypes.func
 };
 
 export default Dragger;

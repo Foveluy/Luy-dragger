@@ -1,17 +1,38 @@
-import React from 'react';
-import Dragger from './Dragger';
+import React from "react";
+import Dragger from "./Dragger";
 
-import './index.css';
+import "./index.css";
 
 export default class LayoutDemo extends React.Component {
+  state = {
+    x: 0,
+    y: 0
+  };
+
   render() {
-    const name = 'props-draggers';
+    const name = "props-draggers";
 
     return (
       <div>
+        <Dragger
+          x={this.state.x}
+          y={this.state.y}
+          onDragging={(x, y) => {
+            this.setState({
+              x,
+              y
+            });
+          }}
+        >
+          {({ style, handle }) => (
+            <div className={name} style={style} {...handle()}>
+              受控组件
+            </div>
+          )}
+        </Dragger>
         <Dragger>
           {({ style, handle }) => (
-            <div className={name} style={{ ...style }} {...handle()}>
+            <div className={name} style={style} {...handle()}>
               普通的拖拽组件
             </div>
           )}
@@ -22,7 +43,7 @@ export default class LayoutDemo extends React.Component {
               className={name}
               style={{
                 ...style,
-                backgroundColor: dragging ? 'rgba(180,120,180,0.5)' : 'white'
+                backgroundColor: dragging ? "rgba(180,120,180,0.5)" : "white"
               }}
               {...handle()}
             >
@@ -33,7 +54,10 @@ export default class LayoutDemo extends React.Component {
         <Dragger>
           {({ style, handle, x, y }) => (
             <div className={name} style={style} {...handle()}>
-              相对x:{x},相对y:{y}
+              相对x:
+              {x}
+              ,相对y:
+              {y}
             </div>
           )}
         </Dragger>
@@ -58,10 +82,10 @@ export default class LayoutDemo extends React.Component {
                 {...handle()}
                 style={{
                   padding: 2,
-                  textAlign: 'center',
-                  background: 'rgba(120, 120, 120, 0.4)',
-                  borderRadius: '5px',
-                  color: 'white',
+                  textAlign: "center",
+                  background: "rgba(120, 120, 120, 0.4)",
+                  borderRadius: "5px",
+                  color: "white",
                   fontSize: 8
                 }}
               >
@@ -82,7 +106,7 @@ export default class LayoutDemo extends React.Component {
           {({ style }) => (
             <div
               className={name}
-              style={{ style, backgroundColor: 'rgba(120,120,120,0.1)' }}
+              style={{ style, backgroundColor: "rgba(120,120,120,0.1)" }}
             >
               静态，别想拖动我
             </div>
@@ -96,13 +120,13 @@ export default class LayoutDemo extends React.Component {
                 ...bound.style,
                 width: 150,
                 height: 150,
-                border: '1px solid black',
+                border: "1px solid black",
                 margin: 10
               }}
             >
               <div
                 className={name}
-                style={{ ...style, border: '1px solid rgba(120,120,120,0.3)' }}
+                style={{ ...style, border: "1px solid rgba(120,120,120,0.3)" }}
                 {...handle()}
               >
                 不能离开框框的范围

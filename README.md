@@ -13,7 +13,7 @@ npm install props-dragger
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dragger from 'props-dragger';
+import Dragger from '@props/dragger';
 
 const Demo = () => {
   return (
@@ -43,10 +43,10 @@ ReactDOM.render(<Demo />, document.getElementById('root'));
 |grid|<br/>    以网格的方式移动，每次移动并不是平滑的移动<br/>    [20,30]，鼠标x轴方向移动了20 px ，y方向移动了30 px，整个子元素才会移动<br/>   |array|false|undefined|
 |allowX|只允许移动x轴 |bool|false|true|
 |allowY|只允许移动y轴 |bool|false|true|
-|hasCancelHandle|<br/>    内部取消的区域<br/>    <Dragger hasCancelHandle={true}><br/>         <div className={cancel} >点击我拖动</div><br/>    </Dragger><br/>   |bool|false|undefined|
-|isUserMove|<br/>    是否由用户移动<br/>    可能是通过外部props改变<br/>   |bool|false|true|
+|isUserMove|<br/>    是否由用户移动<br/>    可能是通过外部props改变<br/>   |bool|false|undefined|
 |static|<br/>    是否静态<br/>    设置了就不可移动<br/>   |bool|false|undefined|
 |onDragStart|<br/>    开始拖拽<br/>   |func|false|undefined|
 |onDragMove|<br/>    正在拖拽<br/>   |func|false|undefined|
 |onDragEnd|<br/>    结束拖拽，鼠标弹开<br/>   |func|false|undefined|
+|onDragging|<br/>    受控函数<br/>   |func|false|undefined|
     
