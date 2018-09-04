@@ -13,7 +13,7 @@ npm install props-dragger
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Dragger from 'props-dragger';
+import Dragger from '@props/dragger';
 
 const Demo = () => {
   return (
