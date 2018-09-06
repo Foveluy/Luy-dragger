@@ -16,8 +16,8 @@ html {
 .props-draggers {
     margin: 10px;
     font-size: 10px;
-    width: 100px;
-    height: 50px;
+    width: 200px;
+    height: 80px;
     border-radius: 5px;
     display: flex;
     left: 0;

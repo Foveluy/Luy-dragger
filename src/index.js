@@ -5,5 +5,5 @@ import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import List from './list';
 
-ReactDOM.render(<List gap={55} />, document.getElementById('root'));
+ReactDOM.render(<List gap={100} />, document.getElementById('root'));
 registerServiceWorker();
