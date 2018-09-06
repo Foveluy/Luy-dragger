@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import List from './list';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<List gap={55} />, document.getElementById('root'));
 registerServiceWorker();
