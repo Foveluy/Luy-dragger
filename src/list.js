@@ -75,7 +75,7 @@ export default class SortList extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ height: 300, overflow: "hidden" }}>
         {this.state.order.map(order => {
           //获取当前的实际位置
           const delta = order.o * this.getGap(order.o);
