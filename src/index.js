@@ -9,7 +9,12 @@ const Data = [
   { name: 1, o: 0 },
   { name: 2, o: 1 },
   { name: 3, o: 2 },
-  { name: 4, o: 3 }
+  { name: 4, o: 3 },
+  { name: 5, o: 4 },
+  { name: 6, o: 5 },
+  { name: 7, o: 6 },
+  { name: 8, o: 7 },
+  { name: 9, o: 8 },
 ];
 
 class C extends React.Component {
