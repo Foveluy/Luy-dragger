@@ -1,5 +1,6 @@
-import React from 'react';
-import Dragger from './Dragger';
+import React from "react";
+import Dragger from "./Dragger";
+import Equal from "fast-deep-equal";
 
 /**
  * 2.4213xxx -> 2
@@ -13,37 +14,45 @@ const clamp = x => {
   return left > 0.5 ? num + 1 : num;
 };
 
+/**
+ *  min<num<max
+ */
+const between = (num, min, max) => {
+  return Math.max(min, Math.min(num, max));
+};
+
 export default class SortList extends React.Component {
   constructor(props) {
     super(props);
-    this.item = {};
+
+    const data = props.data;
     this.state = {
-      order: [
-        { name: 1, o: 0 },
-        { name: 2, o: 1 },
-        { name: 3, o: 2 },
-        { name: 4, o: 3 }
-      ],
+      order: data,
       currentOrder: -1
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return !Equal(this.props, nextProps) || !Equal(nextState, this.state);
+  }
+
   static defaultProps = {
     gap: 80,
-    horizontal: false
+    horizontal: false,
+    renderItem: () => null
   };
 
   dragging = (preOrder, x, y) => {
     const fixedDirection = this.props.horizontal ? x : y;
 
     const o = clamp(fixedDirection / this.getGap(preOrder.o));
-    const count = this.state.order.length - 1;
+    const max = this.state.order.length - 1;
     const newOrder = this.state.order.map(od => {
       if (o === od.o) {
         return { ...od, o: preOrder.o };
       }
       if (preOrder.o === od.o) {
-        return { ...od, o: o > count ? count : o };
+        return { ...od, o: between(o, 0, max) };
       }
       return od;
     });
@@ -60,7 +69,7 @@ export default class SortList extends React.Component {
     });
   };
 
-  getGap = order => {
+  getGap = () => {
     return this.props.gap;
   };
 
@@ -74,24 +83,21 @@ export default class SortList extends React.Component {
             <Dragger
               onDragMove={(event, x, y) => this.dragging(order, x, y)}
               key={order.name}
-              x={this.props.horizontal ? delta : 300}
+              x={this.props.horizontal ? delta : 0}
               controlled={this.state.currentOrder !== order.o}
-              y={this.props.horizontal ? 300 : delta}
+              y={this.props.horizontal ? 0 : delta}
               onDragEnd={this.dragEnd}
             >
               {({ style, handle }) => (
                 <div
-                  ref={node => (this.item[order.o] = node)}
-                  className="props-draggers"
                   style={{
                     ...style,
-                    position: 'absolute',
+                    position: "absolute",
                     transition:
-                      this.state.currentOrder === order.o ? 'none' : 'all 0.3s'
+                      this.state.currentOrder === order.o ? "none" : "all 0.3s"
                   }}
-                  {...handle()}
                 >
-                  item {order.name}
+                  {this.props.renderItem(handle, order)}
                 </div>
               )}
             </Dragger>
