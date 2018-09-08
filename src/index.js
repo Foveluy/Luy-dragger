@@ -1,21 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
 // import App from './App';
-import registerServiceWorker from "./registerServiceWorker";
-import List from "./list";
+import registerServiceWorker from './registerServiceWorker';
+import List from './list';
 
-const Data = [
-  { name: 1, o: 0 },
-  { name: 2, o: 1 },
-  { name: 3, o: 2 },
-  { name: 4, o: 3 },
-  { name: 5, o: 4 },
-  { name: 6, o: 5 },
-  { name: 7, o: 6 },
-  { name: 8, o: 7 },
-  { name: 9, o: 8 },
-];
+const Data = [];
+
+for (let index = 0; index < 20; index++) {
+  Data.push({ name: index + 1, o: index });
+}
 
 class C extends React.Component {
   state = { horzontal: false, gap: 100 };
@@ -48,5 +42,5 @@ class C extends React.Component {
   }
 }
 
-ReactDOM.render(<C />, document.getElementById("root"));
+ReactDOM.render(<C />, document.getElementById('root'));
 registerServiceWorker();

@@ -46,11 +46,19 @@ class Dragger extends React.Component {
     /**已经移动的位移，单位是px */
     lastX: 0,
     lastY: 0,
-    dragging: false
+    dragging: false,
+    mouseInTarget: 0
   };
 
   getParent = node => {
     this.parent = node;
+  };
+
+  autoMove = (x, y) => {
+    this.setState({
+      x: x,
+      y: y
+    });
   };
 
   move = event => {
@@ -137,9 +145,14 @@ class Dragger extends React.Component {
     this.props.onDragMove && this.props.onDragMove(event, deltaX, deltaY);
     this.props.onDragging(deltaX, deltaY);
 
+    const ofy =
+      event.clientY +
+      this.props.parent().scrollTop -
+      this.props.parent().getBoundingClientRect().top;
+
     this.setState({
       x: deltaX,
-      y: deltaY
+      y: ofy - this.state.mouseInTarget
     });
   };
 
@@ -168,7 +181,7 @@ class Dragger extends React.Component {
     this.props.onDragStart &&
       this.props.onDragStart(event, this.state.x, this.state.y);
 
-    this.props.onDragging(this.props.x, this.props.y);
+    this.props.onDragging(this.state.x, this.state.y);
 
     let deltaX = event.clientX;
     let deltaY = event.clientY;
@@ -182,7 +195,8 @@ class Dragger extends React.Component {
       originY: deltaY,
       lastX: this.state.x,
       lastY: this.state.y,
-      dragging: true
+      dragging: true,
+      mouseInTarget: event.clientY - event.target.getBoundingClientRect().top
     });
   };
 
@@ -222,7 +236,8 @@ class Dragger extends React.Component {
   componentDidMount() {
     /**
      * 这个函数只会调用一次
-     * 这个只是一个临时的解决方案，因为这样会使得元素进行两次刷新
+     * 当外面的组件是受控组件的时候
+     * 同于同步内外部的 x,y
      */
     if (typeof this.props.x === 'number' && typeof this.props.y === 'number') {
       this.setState({
@@ -248,10 +263,10 @@ class Dragger extends React.Component {
     // const X = this.props.x === void 666 ? x : this.props.x;
     // const Y = this.props.y === void 666 ? y : this.props.y;
 
-    /**主要是为了让用户定义自己的className去修改css */
-    const fixedClassName = classNames('WrapDragger', {
-      [className]: className !== void 666
-    });
+    // /**主要是为了让用户定义自己的className去修改css */
+    // const fixedClassName = classNames('WrapDragger', {
+    //   [className]: className !== void 666
+    // });
 
     const getHandle = () => {
       return {
@@ -273,19 +288,15 @@ class Dragger extends React.Component {
       style: { position: 'absolute' }
     };
 
-    return (
-      <div className={fixedClassName}>
-        {children({
-          style: providedStyle,
-          handle: getHandle,
-          x: X,
-          y: Y,
-          bound: bound,
-          static: this.props.static,
-          dragging: this.state.dragging
-        })}
-      </div>
-    );
+    return children({
+      style: providedStyle,
+      handle: getHandle,
+      x: X,
+      y: Y,
+      bound: bound,
+      static: this.props.static,
+      dragging: this.state.dragging
+    });
   }
 }
 
