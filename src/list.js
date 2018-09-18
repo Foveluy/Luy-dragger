@@ -50,6 +50,7 @@ export default class SortList extends React.Component {
   dragging = (preOrder, x, y, event) => {
     this.currentX = x;
     this.currentY = y;
+
     const fixedDirection = this.props.horizontal ? x : y;
 
     const o = clamp(fixedDirection / this.getGap(preOrder.o));
@@ -63,6 +64,8 @@ export default class SortList extends React.Component {
       }
       return od;
     });
+
+    console.log(fixedDirection);
 
     if (this.container.scrollTop + 300 - y < 100 && this.timer === -1) {
       /**
@@ -101,27 +104,23 @@ export default class SortList extends React.Component {
           return od;
         });
 
+        this.setState({
+          currentOrder: o,
+          order: newOrder,
+          autoScrolling: true
+        });
+
         if (
           nextY - this.container.scrollTop < 150 &&
           this.state.autoScrolling
         ) {
           clearInterval(this.timer);
 
-          console.log(o);
           this.timer = -1;
           this.setState({
-            currentOrder: o,
             autoScrolling: false
           });
-
-          return;
         }
-
-        this.setState({
-          currentOrder: o,
-          order: newOrder,
-          autoScrolling: true
-        });
       }, 5);
     }
 

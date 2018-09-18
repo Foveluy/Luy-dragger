@@ -66,6 +66,7 @@ class Dragger extends React.Component {
     doc.body.style.userSelect = 'none';
 
     let { lastX, lastY } = this.state;
+
     /*  event.client - this.state.origin 表示的是移动的距离,
     *   elX表示的是原来已经有的位移
     */
@@ -143,7 +144,7 @@ class Dragger extends React.Component {
 
     /**移动时回调，用于外部控制 */
     this.props.onDragMove && this.props.onDragMove(event, deltaX, deltaY);
-    this.props.onDragging(deltaX, deltaY);
+    this.props.onDragging(this.state.x, this.state.y);
 
     const ofy =
       event.clientY +
@@ -197,6 +198,14 @@ class Dragger extends React.Component {
       lastY: this.state.y,
       dragging: true,
       mouseInTarget: event.clientY - event.target.getBoundingClientRect().top
+    });
+  };
+
+  setLastXandLastY = (x, y, originX, originY) => {
+    this.setState({
+      lastX: x,
+      lastY: y,
+      originY
     });
   };
 
